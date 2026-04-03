@@ -29,9 +29,15 @@
             <span th:text="${task.title}"
                   th:classappend="${task.completed}? 'line-through text-gray-400 font-semibold' : 'font-medium'"></span>
             <div class="flex gap-2">
+                <!-- View Button -->
+                <a th:href="@{'/tasks/' + ${task.id}}"
+                        class="bg-blue-100 text-blue-600 px-2 py-1 rounded hover:bg-blue-200 transition-colors">View</a>
+
+
                 <form th:action="@{/tasks/{id}(id=${task.id})}" th:method="PATCH" th:unless="${task.isCompleted()}">
                     <button class="bg-green-100 text-green-600 px-2 py-1 rounded hover:bg-green-200 transition-colors">✔</button>
                 </form>
+
                 <form th:action="@{/tasks/{id}(id=${task.id})}" th:method="DELETE">
                     <button class="bg-red-100 text-red-600 px-2 py-1 rounded hover:bg-red-200 transition-colors">✖</button>
                 </form>
@@ -39,5 +45,6 @@
         </li>
     </ul>
 </div>
+
 </body>
 </html>

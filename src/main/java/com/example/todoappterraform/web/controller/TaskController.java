@@ -1,5 +1,6 @@
 package com.example.todoappterraform.web.controller;
 
+import com.example.todoappterraform.model.Task;
 import com.example.todoappterraform.service.TaskService;
 import com.example.todoappterraform.web.dto.AddTaskRequest;
 import jakarta.validation.Valid;
@@ -29,6 +30,18 @@ public class TaskController {
         modelAndView.setViewName("index");
         modelAndView.addObject("tasks", this.taskService.getAllTodoTasks());
         modelAndView.addObject("addTaskRequest", new AddTaskRequest());
+
+        return modelAndView;
+    }
+
+    @GetMapping("/{id}")
+    public ModelAndView getTaskDetailsPage(@PathVariable UUID id) {
+
+        Task task = this.taskService.getTaskById(id);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("task-details");
+        modelAndView.addObject("task", task);
 
         return modelAndView;
     }

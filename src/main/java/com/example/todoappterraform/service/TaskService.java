@@ -15,4 +15,7 @@ public interface TaskService {
     void deleteTask(UUID id);
 
     Task toggleComplete(UUID id);
+
+    Task getTaskById(UUID id);
+
 }

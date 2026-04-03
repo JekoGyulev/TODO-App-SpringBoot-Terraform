@@ -58,4 +58,9 @@ public class TaskServiceImpl implements TaskService {
 
         return this.taskRepository.save(task);
     }
+
+    @Override
+    public Task getTaskById(UUID id) {
+        return this.taskRepository.findById(id).orElse(null);
+    }
 }
