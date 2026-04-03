@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
-import static jakarta.persistence.GenerationType.UUID;
-
 @Entity
 @Table(name = "tasks")
 @Builder
@@ -16,7 +14,7 @@ import static jakarta.persistence.GenerationType.UUID;
 @NoArgsConstructor
 public class Task {
     @Id
-    @GeneratedValue(strategy = UUID)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @Column(nullable = false)
     private String title;
