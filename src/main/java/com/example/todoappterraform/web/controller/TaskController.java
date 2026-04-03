@@ -1,4 +1,4 @@
-package com.example.todoappterraform.web;
+package com.example.todoappterraform.web.controller;
 
 import com.example.todoappterraform.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
