@@ -28,20 +28,25 @@ public class TaskController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
         modelAndView.addObject("tasks", this.taskService.getAllTodoTasks());
+        modelAndView.addObject("addTaskRequest", new AddTaskRequest());
 
         return modelAndView;
     }
 
     @PostMapping
-    public String addTask(@Valid AddTaskRequest addTaskRequest, BindingResult bindingResult) {
+    public ModelAndView addTask(@Valid AddTaskRequest addTaskRequest, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "index";
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("index");
+            modelAndView.addObject("tasks", this.taskService.getAllTodoTasks());
+
+            return modelAndView;
         }
 
         this.taskService.addTask(addTaskRequest);
 
-        return "redirect:/tasks/";
+        return new ModelAndView("redirect:/tasks/");
     }
 
     @DeleteMapping("/{id}")

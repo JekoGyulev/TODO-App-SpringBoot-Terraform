@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Todo App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+<div class="bg-white shadow-xl rounded-lg p-8 w-full max-w-lg">
+    <h1 class="text-3xl font-bold mb-6 text-center text-blue-600">Todo App</h1>
 
+    <!-- Add Task Form -->
+    <form th:action="@{/tasks}" th:object="${addTaskRequest}" th:method="POST" class="space-y-3 mb-6">
+        <input type="text" th:field="*{title}" placeholder="Title of your task"
+               class="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+
+        <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color: red"></p>
+
+        <input type="text" th:field="*{description}" placeholder="Description of your task"
+               class="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+        <button type="submit"
+                class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition-colors">Add Task
+        </button>
+    </form>
+
+    <!-- Task List -->
+    <ul class="space-y-3">
+        <li th:each="task : ${tasks}" class="flex items-center justify-between p-3 border rounded hover:shadow-md transition-shadow">
+            <span th:text="${task.title}"
+                  th:classappend="${task.completed}? 'line-through text-gray-400 font-semibold' : 'font-medium'"></span>
+            <div class="flex gap-2">
+                <form th:action="@{/tasks/{id}(id=${task.id})}" th:method="PATCH" th:unless="${task.isCompleted()}">
+                    <button class="bg-green-100 text-green-600 px-2 py-1 rounded hover:bg-green-200 transition-colors">✔</button>
+                </form>
+                <form th:action="@{/tasks/{id}(id=${task.id})}" th:method="DELETE">
+                    <button class="bg-red-100 text-red-600 px-2 py-1 rounded hover:bg-red-200 transition-colors">✖</button>
+                </form>
+            </div>
+        </li>
+    </ul>
+</div>
 </body>
 </html>
