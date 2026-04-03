@@ -3,6 +3,7 @@ package com.example.todoappterraform.service.impl;
 import com.example.todoappterraform.model.Task;
 import com.example.todoappterraform.repository.TaskRepository;
 import com.example.todoappterraform.service.TaskService;
+import com.example.todoappterraform.web.dto.AddTaskRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,14 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task saveTask(Task task) {
+    public Task addTask(AddTaskRequest addTaskRequest) {
+
+        Task task = Task.builder()
+                .title(addTaskRequest.getTitle())
+                .description(addTaskRequest.getDescription())
+                .isCompleted(false)
+                .build();
+
         return this.taskRepository.save(task);
     }
 
