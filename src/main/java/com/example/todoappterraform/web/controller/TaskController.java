@@ -14,7 +14,7 @@ import java.util.UUID;
 
 
 @Controller
-@RequestMapping("/tasks")
+@RequestMapping("/")
 public class TaskController {
 
     private final TaskService taskService;
@@ -23,8 +23,7 @@ public class TaskController {
     public TaskController(TaskService taskService) {
         this.taskService = taskService;
     }
-
-    @GetMapping("/")
+    @GetMapping
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
@@ -34,7 +33,7 @@ public class TaskController {
         return modelAndView;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/tasks/{id}")
     public ModelAndView getTaskDetailsPage(@PathVariable UUID id) {
 
         Task task = this.taskService.getTaskById(id);
@@ -59,19 +58,19 @@ public class TaskController {
 
         this.taskService.addTask(addTaskRequest);
 
-        return new ModelAndView("redirect:/tasks/");
+        return new ModelAndView("redirect:/");
     }
 
     @DeleteMapping("/{id}")
     public String deleteTask(@PathVariable UUID id) {
         this.taskService.deleteTask(id);
-        return "redirect:/tasks/";
+        return "redirect:/";
     }
 
     @PatchMapping("/{id}")
     public String toggleComplete(@PathVariable UUID id) {
         this.taskService.toggleComplete(id);
-        return "redirect:/tasks/";
+        return "redirect:/";
     }
 
 

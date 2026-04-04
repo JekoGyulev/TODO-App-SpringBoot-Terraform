@@ -10,7 +10,7 @@
     <h1 class="text-3xl font-bold mb-6 text-center text-blue-600">Todo App</h1>
 
     <!-- Add Task Form -->
-    <form th:action="@{/tasks}" th:object="${addTaskRequest}" th:method="POST" class="space-y-3 mb-6">
+    <form th:action="@{/}" th:object="${addTaskRequest}" th:method="POST" class="space-y-3 mb-6">
         <input type="text" th:field="*{title}" placeholder="Title of your task"
                class="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"/>
 
@@ -34,11 +34,11 @@
                         class="bg-blue-100 text-blue-600 px-2 py-1 rounded hover:bg-blue-200 transition-colors">View</a>
 
 
-                <form th:action="@{/tasks/{id}(id=${task.id})}" th:method="PATCH" th:unless="${task.isCompleted()}">
+                <form th:action="@{/{id}(id=${task.id})}" th:method="PATCH" th:unless="${task.isCompleted()}">
                     <button class="bg-green-100 text-green-600 px-2 py-1 rounded hover:bg-green-200 transition-colors">✔</button>
                 </form>
 
-                <form th:action="@{/tasks/{id}(id=${task.id})}" th:method="DELETE">
+                <form th:action="@{/{id}(id=${task.id})}" th:method="DELETE">
                     <button class="bg-red-100 text-red-600 px-2 py-1 rounded hover:bg-red-200 transition-colors">✖</button>
                 </form>
             </div>
