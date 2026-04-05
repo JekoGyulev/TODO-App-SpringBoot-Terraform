@@ -31,6 +31,7 @@ resource "azurerm_linux_web_app" "todoapp-web-app" {
   resource_group_name = azurerm_resource_group.todoapprg.name
   service_plan_id     = azurerm_service_plan.service_plan.id
 
+
   site_config {
     always_on = false
 
@@ -39,6 +40,8 @@ resource "azurerm_linux_web_app" "todoapp-web-app" {
       java_server         = var.java_server
       java_server_version = var.java_server_version
     }
+
+    app_command_line = "java -jar /home/site/wwwroot/TODO-App-Terraform-0.0.1-SNAPSHOT.jar"
   }
 
   connection_string {
@@ -71,14 +74,6 @@ resource "azurerm_mysql_flexible_database" "mysql_database" {
   name                = var.mysql_db_name
   resource_group_name = azurerm_resource_group.todoapprg.name
   server_name         = azurerm_mysql_flexible_server.mysql_server.name
-}
-
-resource "azurerm_app_service_source_control" "source_control" {
-  app_id   = azurerm_linux_web_app.todoapp-web-app.id
-  branch   = var.source_control_branch
-  repo_url = var.source_control_url
-
-  use_manual_integration = true
 }
 
 
