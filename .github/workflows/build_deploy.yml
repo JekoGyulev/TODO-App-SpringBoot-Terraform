@@ -28,14 +28,7 @@ jobs:
       - name: Build with Maven
         run: mvn clean package -DskipTests
 
-      # Step 4: Upload JAR as artifact (optional)
-      - name: Upload JAR
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-jar
-          path: target/*.jar
-
-      # Step 5: Deploy to Azure Web App
+      # Step 4: Deploy to Azure Web App
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
