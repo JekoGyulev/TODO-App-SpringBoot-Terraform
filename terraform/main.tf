@@ -41,7 +41,7 @@ resource "azurerm_linux_web_app" "todoapp-web-app" {
       java_server_version = var.java_server_version
     }
 
-    app_command_line = "java -jar /home/site/wwwroot/TODO-App-Terraform-0.0.1-SNAPSHOT.jar"
+    app_command_line = "java -jar /home/site/wwwroot/app.jar"
   }
 
   connection_string {
