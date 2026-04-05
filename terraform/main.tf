@@ -41,7 +41,7 @@ resource "azurerm_linux_web_app" "todoapp-web-app" {
       java_server_version = var.java_server_version
     }
 
-    app_command_line = "java -jar /home/site/wwwroot/app.jar"
+    app_command_line = "java -Dspring.profiles.active=prod -jar /home/site/wwwroot/app.jar"
   }
 
   connection_string {
