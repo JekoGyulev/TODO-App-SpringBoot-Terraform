@@ -32,9 +32,9 @@ resource "azurerm_linux_web_app" "todoapp-web-app" {
   service_plan_id     = azurerm_service_plan.service_plan.id
 
   app_settings = {
-    "MYSQL_ADMIN_LOGIN"    = var.mysql_admin_login
-    "MYSQL_ADMIN_PASSWORD" = var.mysql_admin_password
-    "SPRING_DATASOURCE_URL"      = "jdbc:mysql://mysql-server-jeko.mysql.database.azure.com:3306/todoapp_db_jeko?sslMode=REQUIRED"
+    "MYSQL_ADMIN_LOGIN"     = var.mysql_admin_login
+    "MYSQL_ADMIN_PASSWORD"  = var.mysql_admin_password
+    "SPRING_DATASOURCE_URL" = "jdbc:mysql://mysql-server-jeko.mysql.database.azure.com:3306/todoapp_db_jeko?sslMode=REQUIRED"
   }
 
 
@@ -47,7 +47,7 @@ resource "azurerm_linux_web_app" "todoapp-web-app" {
       java_server_version = var.java_server_version
     }
 
-    app_command_line = "java -jar /home/site/wwwroot/app.jar"
+    app_command_line = "java -Dspring.profiles.active=prod -jar /home/site/wwwroot/app.jar"
   }
 
   connection_string {
