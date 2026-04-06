@@ -31,6 +31,12 @@ resource "azurerm_linux_web_app" "todoapp-web-app" {
   resource_group_name = azurerm_resource_group.todoapprg.name
   service_plan_id     = azurerm_service_plan.service_plan.id
 
+  app_settings = {
+    "MYSQL_ADMIN_LOGIN"    = var.mysql_admin_login
+    "MYSQL_ADMIN_PASSWORD" = var.mysql_admin_password
+    "SPRING_DATASOURCE_URL"      = "jdbc:mysql://mysql-server-jeko.mysql.database.azure.com:3306/todoapp_db_jeko?sslMode=REQUIRED"
+  }
+
 
   site_config {
     always_on = false
